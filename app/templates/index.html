@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Друзья рекомендуют</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="p-4">
+<div class="container">
+    <h1 class="mb-4">Рекомендации отелей</h1>
+    <a href="/?friends=1" class="btn btn-primary mb-3">Показать только рекомендованные друзьями</a>
+    <a href="/" class="btn btn-secondary mb-3">Показать все</a>
+    <div class="row">
+        {% for h in hotels %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ h.name }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ h.city }}</h6>
+                    {% if h.reviews %}
+                        <span class="badge bg-success">Рекомендовано другом</span>
+                        {% for r in h.reviews %}
+                            <p class="mt-2"><strong>{{ r.user.username }}</strong>: {{ r.text }}</p>
+                        {% endfor %}
+                    {% else %}
+                        <p class="text-muted">Пока нет отзывов друзей</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>
